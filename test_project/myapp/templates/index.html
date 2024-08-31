@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block body %}
+<form action="create"  method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text"  name="name" class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <label>MobileNumber</label>
+        <input type="text"  name="phonenumber" class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <label>Email.id</label>
+        <input type="text"  name="email"class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <label>Image</label>
+        <input type="file"  name="image" class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <button type="success"  class="btn btn-primary">Create</button>
+    </div>
+</form>
+<br/>
+
+
+
+<table class="table table-bordered">
+    <thead class="alert-success">
+        {% load static %}
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>MobileNumber</th>
+            <th>Email.id</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for blue in blues %}
+        <tr>
+            <td>{{ blue.id }}</td>
+            <td>{{ blue.name }}</td>
+            <td>{{ blue.phonenumber }}</td>
+            <td>{{ blue.email }}</td>
+            {% if blue.image %}
+               <td>
+                  <img src="{{ blue.image.url }}" style="height: 70px; width: 70px;" alt="" class="prod-size">
+               </td>
+            {% else %}
+                <td>
+                   <img src="{% static '' %}" alt="" class="prod-size">
+                </td>
+            {% endif %} 
+            <td><center>
+                <a class="btn btn-warning edit" href="edit/{{blue.id}}">Edit</a>
+                <a class="btn btn-danger delete" href="delete/{{blue.id}}">Delete</a>
+            </center>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,36 @@
+<table class="table table-bordered">
+    <thead class="alert-success">
+        {% load static %}
+        <tr>
+            <th>Name</th>
+            <th>MobileNumber</th>
+            <th>Email.id</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for blue in blues %}
+        <tr>
+            <td>{{ blue.name }}</td>
+            <td>{{ blue.phonenumber }}</td>
+            <td>{{ blue.email }}</td>
+            <!-- <td>{{ blue.image }}</td> -->
+            {% if blue.image %}
+               <td>
+                  <img src="{{ blue.image.url }}" alt="" class="prod-size">
+               </td>
+            {% else %}
+                <td>
+                   <img src="{% static '' %}" alt="" class="prod-size">
+                </td>
+            {% endif %} 
+            <td><center>
+                <a class="btn btn-warning edit" name="{{ blue.id }}">Edit</a>
+                <a class="btn btn-danger delete" name="{{ blue.id }}">Delete</a>
+            </center>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
